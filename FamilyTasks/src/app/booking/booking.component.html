@@ -1,0 +1,49 @@
+<div class="centeredContent400">
+    <section class="content" *ngIf="(showStep1$ | async)">
+        <h2>Pasul 1: Alege o data</h2>
+        <br><br>
+        <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+        </ngb-datepicker>
+        
+        <ng-template #t let-date let-focused="focused">
+            <span
+                class="custom-day"
+                [class.focused]="focused"
+                [class.range]="isRange(date)"
+                [class.faded]="isHovered(date) || isInside(date)"
+                (mouseenter)="hoveredDate = date"
+                (mouseleave)="hoveredDate = null"
+            >
+                {{ date.day }}
+            </span>
+        </ng-template>
+        <div *ngIf="(error$ | async)">
+            <small class="text-danger">Trebuie sa alegi o data</small>
+        </div>
+        <br>
+        <button type="button" class="btn btn-info btn-rounded" (click)="goToSecondStep($event)">Next</button>
+    </section>
+
+    <section class="content" *ngIf="(showStep2$ | async)">
+        <h2>Pasul 2: Cate monitoare vrei sa aiba biroul tau?</h2>
+        <br><br>
+        <select [(ngModel)]="monitor">
+            <option disabled>Choose one</option>
+            <option *ngFor="let example of examples" [value]="example.name" [disabled]="example.isDisabled">{{ example.name }}</option>
+          </select>
+          <br>
+        <div *ngIf="(error$ | async)">
+            <small class="text-danger">Trebuie sa alegi un numar</small>
+        </div>
+        <br>
+        <button type="button" class="btn btn-info btn-rounded" style="margin-right: 10px;"(click)="goBackToStepOne($event)">Back</button>
+        <button type="button" class="btn btn-info btn-rounded" (click)="goToThirdStep($event)">Next</button>
+    </section>
+
+    <section class="content" *ngIf="(showStep3$ | async)">
+        <h2>Pasul 3: Final</h2>
+        <br><br>
+        <button type="button" class="btn btn-info btn-rounded" style="margin-right: 10px;"(click)="goBackToStepTwo($event)">Back</button>
+        <button type="button" class="btn btn-info btn-rounded" (click)="submitBooking()">Next</button>
+    </section>
+</div>

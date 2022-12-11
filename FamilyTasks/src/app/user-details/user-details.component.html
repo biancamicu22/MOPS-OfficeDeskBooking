@@ -1,0 +1,154 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="edit-container container">
+
+  <div *ngIf="successfullyUpdatedPasswordUser == true" class="alert alert-success" role="alert">
+    User password was updated successfully!
+  </div>
+  <div *ngIf="wrongUpdatedPasswordUser == true" class="alert alert-danger" role="alert">
+    The data couldn't be updated. Please try again!
+  </div>
+  <div class="row flex-lg-nowrap">
+
+    <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+    </div>
+
+    <div class="col">
+      <div class="row">
+        <div class="col mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="e-profile">
+                <div class="row">
+                  <div class="col-12 col-sm-auto mb-3">
+                    <div class="mx-auto" style="width: 140px;">
+                      <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px">
+                        <img src="/assets/edit-profile.png">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                    <div class="text-center text-sm-left mb-2 mb-sm-0">
+                      <h3 class="pt-sm-2 pb-1 mb-0 text-nowrap"><b>{{user.firstName}} {{user.lastName}}</b></h3>
+                      <p class="mb-0">{{user.username}}</p>
+                    </div>
+                  </div>
+                </div>
+                <ul class="nav nav-tabs">
+                  <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+                </ul>
+                <div class="tab-content pt-3">
+                  <div class="tab-pane active">
+                    <form class="form" novalidate="" [formGroup]="editUserDetails">
+                      <div class="row">
+                        <div class="col">
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>First Name</label>
+                                <input class="form-control" type="text" name="firstName" formControlName="firstName"
+                                  placeholder="-" value="{{user.firstName}}" disabled="disabled">
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Last Name</label>
+                                <input class="form-control" type="text" name="lastName" formControlName="lastName"
+                                  placeholder="-" value="{{user.lastName}}" disabled="disabled">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Email</label>
+                                <input class="form-control" type="text" name="email" formControlName="email"
+                                  placeholder="-" value="{{user.email}}" disabled="disabled">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Birthdate</label>
+                                <input class="form-control" type="text" name="birthdate" formControlName="birthdate"
+                                  placeholder="-" value={{user.birthdate}} disabled="disabled">
+                              </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                  <label>Phone number</label>
+                                  <input class="form-control" type="text" name="phoneNumber" formControlName="phoneNumber"
+                                    placeholder="-" value={{user.phoneNumber}} disabled="disabled">
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                      <form class="form" novalidate="" [formGroup]="editUserPassword" (ngSubmit)="editPassword()">
+                      <div class="row">
+                        <div class="col-12 col-sm-6 mb-3">
+                          <div class="mb-2"><b>Change Password</b></div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Current Password</label>
+                                <input class="form-control" name="currentPassword" formControlName="currentPassword"
+                                  type="password" placeholder="••••••">
+                                  <div *ngIf="g.currentPassword.errors?.required">
+                                    <small class="text-danger" style="margin: 0px" *ngIf="submitFlagNewUser">Current password is required</small>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>New Password</label>
+                                <input class="form-control" type="password" formControlName="newPassword"
+                                  name="newPassword" placeholder="••••••">
+                                  <div *ngIf="g.newPassword.errors?.required">
+                                    <small class="text-danger" style="margin: 0px" *ngIf="submitFlagNewUser">New password is required</small>
+                                  </div>
+                                  <div *ngIf="submitFlagNewUser">
+                                    <small class="text-danger" style="margin: 0px" *ngIf="submitFlagNewUser">Passwords don't match</small>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
+                                <input class="form-control" name="confirmNewPassword" type="password"
+                                  formControlName="confirmNewPassword" placeholder=" ••••••">
+                                  <div *ngIf="g.confirmNewPassword.errors?.required">
+                                    <small class="text-danger" style="margin: 0px" *ngIf="submitFlagNewUser">Confirmation of new password is required</small>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-sm-5 offset-sm-1 mb-3">
+                          </div>
+                        </div>
+                        </div>
+                      </form>
+                        <div class="row">
+                          <div class="col d-flex justify-content-end">
+                            <button class="btn btn-primary" style="margin-right: 0.5rem;" type="submit" (click)="editPassword()">Change password</button>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-3 mb-3">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
