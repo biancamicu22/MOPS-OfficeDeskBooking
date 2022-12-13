@@ -10,6 +10,10 @@
       <!-- Links -->
       <ul class="navbar-nav ml-auto">
 
+        <li class="nav-item" *ngIf="userLoggedIn" style="margin-left: 10px;">
+          <a class="nav-link waves-light" mdbWavesEffect routerLink='/my-bookings'><mdb-icon fas icon="address-book"></mdb-icon>Rezervarile mele</a>
+        </li>
+
         <li class="nav-item" *ngIf="!userLoggedIn">
           <a class="nav-link waves-light" mdbWavesEffect routerLink='/auth'><mdb-icon fas icon="sign-in-alt"></mdb-icon>Autentificare</a>
         </li>

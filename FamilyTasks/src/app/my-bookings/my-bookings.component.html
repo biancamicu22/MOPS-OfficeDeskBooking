@@ -1,1 +1,13 @@
-<p>my-bookings works!</p>
+<ul class="list-group list-group-light">
+    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let booking of myCurrentBookings">
+      <div class="d-flex align-items-center">
+        <img src="../../assets/Online-Booking-Icon.jpg" alt="" style="width: 45px; height: 45px"
+          class="rounded-circle" />
+        <div class="ms-3">
+          <p class="fw-bold mb-1" style="margin-left: 50px">Data: {{booking.startDate}} - {{booking.endDate}}</p>
+          <p class="text-muted mb-0" style="margin-left: 50px">Numar birou: {{booking.deskNumber}}</p>
+        </div>
+      </div>
+      <button type="button" class="btn btn-danger" (click)="cancelBooking(booking.id)">Cancel</button>
+    </li>
+  </ul>

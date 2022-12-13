@@ -31,24 +31,24 @@ namespace MOPSAPI.Repository
             }
         }
 
-            public bool Delete(string id)
+        public bool Delete(string id)
         {
-                try
+            try
+            {
+                var obj = _context.Set<T>().Find(id);
+                if (obj != null)
                 {
-                    var obj = _context.Set<T>().Find(id);
-                    if (obj != null)
-                    {
-                        _context.Remove(obj);
-                        _context.SaveChanges();
-                        return true;
-                    }
-                    return false;
+                    _context.Remove(obj);
+                    _context.SaveChanges();
+                    return true;
                 }
-                catch (Exception ex)
-                {
-                    return false;
-                }
+                return false;
             }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
         public virtual T Edit(T entity)
         {

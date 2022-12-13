@@ -16,12 +16,10 @@ namespace MOPSAPI.Controllers
     {
         private IDeskRepository _deskRepository;
 
-        public IEntityUpdateHandler EntityUpdateHandler { get; }
-
-        public DeskController(IDeskRepository deskRepository, IMapper autoMapper, IEntityUpdateHandler entityUpdateHandler)
+        public DeskController(IDeskRepository deskRepository)
         {
             _deskRepository = deskRepository;
-            EntityUpdateHandler = entityUpdateHandler;
+            //EntityUpdateHandler = entityUpdateHandler;
         }
 
         [HttpPost]
@@ -29,6 +27,7 @@ namespace MOPSAPI.Controllers
         {
             try
             {
+                if(desk == null) throw new ArgumentNullException(nameof(desk));
                 var atra = desk.ToModel();
                 return Ok(DeskDTO.FromModel(_deskRepository.Add(atra)));
             }
@@ -37,61 +36,55 @@ namespace MOPSAPI.Controllers
                 return BadRequest();
             }
         }
-        [HttpPut]
-        public IActionResult Update([FromBody] DeskDTO desk)
-        {
-            try
-            {
-                if (desk == null) throw new ArgumentNullException();
-                return EntityUpdateHandler.Update<Desk>(desk.ToModel()).ToHttpResponse();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
-        }
 
-        [HttpDelete]
-        [Route("{id}")]
-        public IActionResult Delete(string id)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(id)) throw new ArgumentNullException();
-                return Ok(_deskRepository.Delete(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
-        }
+        //[HttpPut]
+        //public IActionResult Update([FromBody] DeskDTO desk)
+        //{
+        //    try
+        //    {
+        //        if (desk == null) throw new ArgumentNullException();
+        //        return EntityUpdateHandler.Update<Desk>(desk.ToModel()).ToHttpResponse();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
 
-        [HttpGet("{id}")]
-        public IActionResult GetById([FromQuery] string id)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(id)) throw new ArgumentNullException();
-                return Ok(DeskDTO.FromModel(_deskRepository.GetById(id)));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
-        }
+        //[HttpDelete]
+        //[Route("{id}")]
+        //public IActionResult Delete(string id)
+        //{
+        //    try
+        //    {
+        //        if (string.IsNullOrEmpty(id)) throw new ArgumentNullException();
+        //        return Ok(_deskRepository.Delete(id));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
+
+        //[HttpGet("{id}")]
+        //public IActionResult GetById([FromQuery] string id)
+        //{
+        //    try
+        //    {
+        //        if (string.IsNullOrEmpty(id)) throw new ArgumentNullException();
+        //        return Ok(DeskDTO.FromModel(_deskRepository.GetById(id)));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
 
         [HttpGet]
         [Route("all")]
         public IActionResult GetAll()
         {
-            try
-            {
-                return Ok(_deskRepository.GetAll());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
+            return Ok(_deskRepository.GetAll());
         }
     }
 }

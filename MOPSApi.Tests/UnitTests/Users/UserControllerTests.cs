@@ -65,11 +65,11 @@ namespace MOPSAPI.Tests.Users
         }
 
         [Theory]
-        [InlineData("username1", "password_1", 200)]
-        [InlineData("username3", "password_5", 400)]
-        [InlineData("username2", "password_2", 200)]
-        [InlineData("username2", "password_3", 400)]
-        [InlineData("username3", "password_3", 200)]
+        [InlineData("email1@email.com", "password_1", 200)]
+        [InlineData("email1@email.com", "password_5", 400)]
+        [InlineData("email2@email.com", "password_2", 200)]
+        [InlineData("email1@email.com", "password_3", 400)]
+        [InlineData("email3@email.com", "password_3", 200)]
         public async void LoginUser(string username, string password, int statusCode)
         {
             //Arrange
@@ -195,7 +195,7 @@ namespace MOPSAPI.Tests.Users
 
             //Check if new passowrd works
             //Arrange
-            var authRequest = new AuthRequest { email = userToUpdate.UserName, password = "someNewPassword" };
+            var authRequest = new AuthRequest { email = userToUpdate.Email, password = "someNewPassword" };
             //Act
             var result = await Controller.Login(authRequest) as ObjectResult;
             // Assert

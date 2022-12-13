@@ -17,7 +17,7 @@ namespace MOPSAPI.Tests
         public TestFixture()
         {
             var baseDirectory = AppContext.BaseDirectory;
-            var MOPSAPIPATH = Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\..\..\..\MMS\MOPSAPI"));
+            var MOPSAPIPATH = Path.GetFullPath(Path.Combine(baseDirectory, @"..\..\..\..\..\MOPS\MOPSAPI"));
             var builder = new WebHostBuilder()
                 .UseContentRoot(MOPSAPIPATH)
                 .UseStartup<TStartup>();

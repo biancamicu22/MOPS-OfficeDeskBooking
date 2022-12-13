@@ -74,6 +74,11 @@ namespace MOPSAPI.Tests.Users
                             FakeUserRepository.UserList.FirstOrDefault(u => u.Id.ToLower().Equals(id.ToLower()))
             );
 
+            fakeUserManager.Setup(x => x.FindByEmailAsync(It.IsAny<string>()))
+            .ReturnsAsync((string email) =>
+                            FakeUserRepository.UserList.FirstOrDefault(u => u.Email.ToLower().Equals(email.ToLower()))
+            );
+
             return fakeUserManager.Object;
         }
     }

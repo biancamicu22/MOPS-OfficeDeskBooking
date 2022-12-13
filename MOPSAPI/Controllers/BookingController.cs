@@ -14,12 +14,12 @@ namespace MOPSAPI.Controllers
     {
         private IBookingRepository _bookingRepository;
 
-        public IEntityUpdateHandler EntityUpdateHandler { get; }
+       // public IEntityUpdateHandler EntityUpdateHandler { get; }
 
-        public BookingController(IBookingRepository bookingRepository, IMapper autoMapper, IEntityUpdateHandler entityUpdateHandler)
+        public BookingController(IBookingRepository bookingRepository)
         {
             _bookingRepository = bookingRepository;
-            EntityUpdateHandler = entityUpdateHandler;
+         //   EntityUpdateHandler = entityUpdateHandler;
         }
 
         [HttpPost]
@@ -27,6 +27,7 @@ namespace MOPSAPI.Controllers
         {
             try
             {
+                if (booking == null) throw new ArgumentNullException(nameof(booking));
                 return Ok(BookingDTO.FromModel(_bookingRepository.AddBookingRandomPlace(booking)));
             }
             catch (Exception ex)
@@ -34,19 +35,20 @@ namespace MOPSAPI.Controllers
                 return BadRequest();
             }
         }
-        [HttpPut]
-        public IActionResult Update([FromBody] BookingDTO booking)
-        {
-            try
-            {
-                if (booking == null) throw new ArgumentNullException();
-                return EntityUpdateHandler.Update<Booking>(booking.ToModel()).ToHttpResponse();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
-        }
+
+        //[HttpPut]
+        //public IActionResult Update([FromBody] BookingDTO booking)
+        //{
+        //    try
+        //    {
+        //        if (booking == null) throw new ArgumentNullException();
+        //        return EntityUpdateHandler.Update<Booking>(booking.ToModel()).ToHttpResponse();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
 
         [HttpDelete]
         [Route("{id}")]
@@ -54,8 +56,9 @@ namespace MOPSAPI.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(id)) throw new ArgumentNullException();
-                return Ok(_bookingRepository.Delete(id));
+                if (string.IsNullOrEmpty(id)) 
+                    throw new ArgumentNullException();
+                return Ok(_bookingRepository.Delete(Int32.Parse(id)));
             }
             catch (Exception ex)
             {
@@ -63,27 +66,34 @@ namespace MOPSAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById([FromQuery] string id)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(id)) throw new ArgumentNullException();
-                return Ok(BookingDTO.FromModel(_bookingRepository.GetById(id)));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
-        }
+        //[HttpGet("{id}")]
+        //public IActionResult GetById([FromQuery] string id)
+        //{
+        //    try
+        //    {
+        //        if (string.IsNullOrEmpty(id)) throw new ArgumentNullException();
+        //        return Ok(BookingDTO.FromModel(_bookingRepository.GetById(id)));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
 
         [HttpGet]
         [Route("all")]
         public IActionResult GetAll()
         {
+            return Ok(_bookingRepository.GetAll());
+        }
+
+        [HttpGet("my-bookings/{userEmail}")]
+        public IActionResult GetUserActiveBookings(string userEmail)
+        {
             try
             {
-                return Ok(_bookingRepository.GetAll());
+                if (string.IsNullOrEmpty(userEmail)) throw new ArgumentNullException();
+                return Ok(_bookingRepository.getAllActiveUserBookings(userEmail));
             }
             catch (Exception ex)
             {

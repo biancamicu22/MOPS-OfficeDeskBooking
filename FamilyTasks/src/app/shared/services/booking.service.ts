@@ -15,12 +15,19 @@ export class BookingService {
 
   constructor(private appSettings: AppSettings, private http: HttpClient) { }
 
-  public deleteBooking(booking: BookingModel): Observable<any>{
-    return this.http.delete(this.appSettings.baseApiUrl + "booking/" + booking.id);
+  public deleteBooking(bookingId: string): Observable<any>{
+    return this.http.delete(this.appSettings.baseApiUrl + "booking/" + bookingId);
 }
 
 public getAllBookings(): Observable<BookingModel[]>{
     return this.http.get<BookingModel[]>(this.appSettings.baseApiUrl + "booking/all").pipe(map(list => {
+        this.bookingList = list;
+        return list;
+    }));
+}
+
+public getUserActiveBookings(userEmail: string): Observable<BookingModel[]>{
+    return this.http.get<BookingModel[]>(this.appSettings.baseApiUrl + "booking/my-bookings/" + userEmail).pipe(map(list => {
         this.bookingList = list;
         return list;
     }));

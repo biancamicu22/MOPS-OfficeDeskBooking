@@ -41,5 +41,35 @@ namespace MOPSAPI.Repository.Booking
                 return randomPlace.ToModel();
             }
         }
+
+        public List<DataLibrary.Models.Booking> getAllActiveUserBookings(string userEmail)
+        {
+            var users = _context.Set<User>().AsEnumerable();
+            var userId = users.FirstOrDefault(x => x.Email == userEmail);
+
+            var bookings = _context.Set<DataLibrary.Models.Booking>().AsEnumerable();
+            var currentUserBookings = bookings.Where(x => x.User_Id == userId.Id && x.StartDate.Date >= DateTime.Now).ToList();
+
+            return currentUserBookings;
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                var obj = _context.Set<DataLibrary.Models.Booking>().Find(id);
+                if (obj != null)
+                {
+                    _context.Remove(obj);
+                    _context.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

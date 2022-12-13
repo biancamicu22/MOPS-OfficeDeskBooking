@@ -73,12 +73,15 @@ namespace MOPSAPI.Tests.Users
                     Id = i.ToString(),
                     FirstName = $"FirstName {i}",
                     LastName = $"LastName {i}",
-                    UserName = $"username{i}",
-                    Email = $"Email_{i}@email.com",
+                    UserName = $"email{i}@email.com",
+                    Email = $"email{i}@email.com",
                     PasswordHash = $"password_{i}",
                     Bookings = new List<Booking>(),
-                    Roles = "USER,ADMIN"
-                });;
+                    Roles = "USER,ADMIN",
+                    NormalizedEmail = $"email{i}@email.com".ToUpper(),
+                    NormalizedUserName = $"email{i}@email.com".ToUpper(),
+                    EmailConfirmed = true,
+                }); ;;
             }
             return users;
         }
