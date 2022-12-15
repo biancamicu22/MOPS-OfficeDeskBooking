@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SprintService } from 'src/app/shared/services/sprint.service';
 
 @Component({
     selector: 'app-sprint',
@@ -12,11 +11,8 @@ export class SprintComponent implements OnInit {
     
     public createMode: boolean = false;
 
-    constructor(public sprintService: SprintService, public router: Router) {
+    constructor(public router: Router) {
         this.createMode = false;
-        this.sprintService.selectedSprintChanged.subscribe(data => {
-            this.createMode = data.showCreate;
-        });
      }
 
     ngOnInit() { }

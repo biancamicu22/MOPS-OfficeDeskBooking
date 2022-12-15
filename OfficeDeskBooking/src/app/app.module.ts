@@ -17,14 +17,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { CustomLoaderService } from './shared/services/customLoader.service';
 import { SprintComponent } from './sprint/sprint.component';
-import { SprintListComponent } from './sprint/sprint-list/sprint-list.component';
-import { SprintCreateComponent } from './sprint/sprint-create/sprint-create.component';
-import { SprintService } from './shared/services/sprint.service';
-import { TaskService } from './shared/services/task.service';
-import { TaskComponent } from './task/task.component';
-import { TaskListComponent } from './task/task-list/task-list.component';
-import { TaskCreateComponent } from './task/task-create/task-create.component';
-import { TaskUpdateComponent } from './task/task-update/task-update.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { BookingComponent } from './booking/booking.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -35,12 +27,6 @@ import { MyBookingsComponent } from './my-bookings/my-bookings.component';
     AppComponent,
     AuthenticationComponent,
     SprintComponent,
-    SprintListComponent,
-    SprintCreateComponent,
-    TaskComponent,
-    TaskListComponent,
-    TaskCreateComponent,
-    TaskUpdateComponent,
     UserDetailsComponent,
     BookingComponent,
     MyBookingsComponent
@@ -69,8 +55,6 @@ import { MyBookingsComponent } from './my-bookings/my-bookings.component';
     AppSettings,
     CustomLoaderService,
     UserService,
-    SprintService,
-    TaskService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
