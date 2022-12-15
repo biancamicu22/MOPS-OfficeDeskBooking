@@ -17,7 +17,7 @@ namespace DataLibrary.DTO
         public int DeskNumber { get; set; }
 
         [DataMember]
-        [JsonProperty("numerbOfMonitors")]
+        [JsonProperty("numberOfMonitors")]
         public int NumberOfMonitors { get; set; }
         [DataMember]
         [JsonProperty("bookingDesk")]

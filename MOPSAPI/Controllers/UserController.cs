@@ -60,6 +60,7 @@ namespace MOPSAPI.Controllers
         public async Task<ActionResult> Create([FromBody] UserDTO dto)
         {
             dto.Roles = "USER";
+            dto.Password = "officeDeskBooking1";
             var user = dto.ToModel();
             try
             {

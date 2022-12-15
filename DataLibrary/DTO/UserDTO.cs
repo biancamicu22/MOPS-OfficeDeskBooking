@@ -56,6 +56,10 @@ namespace DataLibrary.DTO
         public string UserName { get; set; }
 
         [DataMember]
+        [JsonProperty("phoneNumber")]
+        public string PhoneNumber { get; set; }
+
+        [DataMember]
         [JsonProperty("bookings")]
         public ICollection<BookingDTO> Bookings { get; set; }
 
@@ -76,6 +80,8 @@ namespace DataLibrary.DTO
                 Birthdate = model.Birthdate, 
                 FirstName = model.FirstName, 
                 LastName = model.LastName, 
+                Department = model.Department,
+                PhoneNumber = model.PhoneNumber,
                 Roles = model.Roles, 
                 Description = model.Description, 
                 Bookings = model.Bookings.Select(c => { c.User = model; return BookingDTO.FromModel(c); }).ToList(), 
@@ -93,6 +99,8 @@ namespace DataLibrary.DTO
                 Birthdate = Birthdate, 
                 FirstName = FirstName, 
                 LastName = LastName, 
+                PhoneNumber = PhoneNumber,
+                Department = Department,
                 Roles = Roles, 
                 Description = Description, 
                 Bookings = Bookings.Select(c => c.ToModel()).ToList(), 

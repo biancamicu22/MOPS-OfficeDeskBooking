@@ -21,7 +21,7 @@
             <small class="text-danger">Trebuie sa alegi o data</small>
         </div>
         <br>
-        <button type="button" class="btn btn-info btn-rounded" (click)="goToSecondStep($event)">Next</button>
+        <button type="button" class="btn btn-info btn-rounded" style="margin-top: 40px;" (click)="goToSecondStep($event)">Next</button>
     </section>
 
     <section class="content" *ngIf="(showStep2$ | async)">
@@ -37,13 +37,13 @@
         </div>
         <br>
         <button type="button" class="btn btn-info btn-rounded" style="margin-right: 10px;"(click)="goBackToStepOne($event)">Back</button>
-        <button type="button" class="btn btn-info btn-rounded" (click)="goToThirdStep($event)">Next</button>
+        <button type="button" class="btn btn-info btn-rounded" (click)="submitBooking()">Submit</button>
     </section>
 
-    <section class="content" *ngIf="(showStep3$ | async)">
+    <!-- <section class="content" *ngIf="(showStep3$ | async)">
         <h2>Pasul 3: Final</h2>
         <br><br>
         <button type="button" class="btn btn-info btn-rounded" style="margin-right: 10px;"(click)="goBackToStepTwo($event)">Back</button>
         <button type="button" class="btn btn-info btn-rounded" (click)="submitBooking()">Next</button>
-    </section>
+    </section> -->
 </div>
