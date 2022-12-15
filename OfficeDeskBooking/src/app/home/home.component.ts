@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-sprint',
-    templateUrl: 'sprint.component.html',
-    styleUrls: ['./sprint.component.scss']
+    selector: 'app-home',
+    templateUrl: 'home.component.html',
+    styleUrls: ['./home.component.scss']
 })
 
-export class SprintComponent implements OnInit {
+export class HomeComponent implements OnInit {
     
     public createMode: boolean = false;
 

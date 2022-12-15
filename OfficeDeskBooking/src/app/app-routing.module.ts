@@ -5,7 +5,7 @@ import { BookingComponent } from './booking/booking.component';
 import { MyBookingsComponent } from './my-bookings/my-bookings.component';
 import { Roles } from './shared/models/roles';
 import { AuthGuard } from './shared/services/auth.guard';
-import { SprintComponent } from './sprint/sprint.component';
+import { HomeComponent } from './home/home.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 
 
@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'home', 
-    component: SprintComponent,
+    component: HomeComponent,
     canActivate: [AuthGuard],
     data: { role: [Roles.User], requireLogin: true },
   },

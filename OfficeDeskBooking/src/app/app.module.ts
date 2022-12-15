@@ -16,7 +16,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { CustomLoaderService } from './shared/services/customLoader.service';
-import { SprintComponent } from './sprint/sprint.component';
+import { HomeComponent } from './home/home.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { BookingComponent } from './booking/booking.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -26,7 +26,7 @@ import { MyBookingsComponent } from './my-bookings/my-bookings.component';
   declarations: [
     AppComponent,
     AuthenticationComponent,
-    SprintComponent,
+    HomeComponent,
     UserDetailsComponent,
     BookingComponent,
     MyBookingsComponent
